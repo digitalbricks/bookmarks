@@ -10,9 +10,9 @@ class Bookmarks{
      */
     function __construct() {
         if(!isset($_COOKIE[$this->c_name])){
-            $inital = serialize(array());
-            setcookie($this->c_name,$inital,time()+$this->c_lifetime,'/');         
-        }     
+            $inital = json_encode(array());
+            setcookie($this->c_name,$inital,time()+$this->c_lifetime,'/');       
+        }
     }
 
     /**
@@ -21,7 +21,7 @@ class Bookmarks{
      */
     public function get(){
         if(isset($_COOKIE[$this->c_name])){
-            $content =  unserialize($_COOKIE[$this->c_name]);
+            $content =  json_decode($_COOKIE[$this->c_name],true); // the 'true' argument is important for getting an array!
             if(is_array($content) AND !is_object($content)){
                 return $content;
             } 
@@ -42,7 +42,7 @@ class Bookmarks{
                 if($this->set($cdata)){
                     // update $_COOKIE (for usage until new request)
                     // making sure the get() method will return the up-to-date values
-                    $_COOKIE[$this->c_name] = serialize($cdata);
+                    $_COOKIE[$this->c_name] = json_encode($cdata);
                     return true;
                 }
             }
@@ -62,7 +62,7 @@ class Bookmarks{
         if($this->set($cdata)){
             // update $_COOKIE (for usage until new request)
             // making sure the get() method will return the up-to-date values
-            $_COOKIE[$this->c_name] = serialize($cdata);
+            $_COOKIE[$this->c_name] = json_encode($cdata);
             return true;
         }
         return false;
@@ -74,7 +74,7 @@ class Bookmarks{
      * @return boolean 
      */
     private function set(array $data){
-        $newdata = serialize($data);
+        $newdata = json_encode($data);
         if(setcookie($this->c_name,$newdata,time()+$this->c_lifetime,'/')){
             return true;
         }

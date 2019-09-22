@@ -17,7 +17,7 @@ $('form.bookmark-form-actions').submit(function(event){
         url: $(currentForm).data('ajax-processor'),
         data: formData
     }).done(function(response) {
-        console.log($.cookie("bookmarks"));
+        console.log($.cookie("bookmarks"),response);
         notie.alert({
             type: "success",
             text: "Erfolgreich"
