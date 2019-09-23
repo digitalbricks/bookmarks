@@ -17,11 +17,11 @@ $marks_count = $bookmarks->count();
 </head>
 <body>
     <div class="container">
-        <h1>Bookmarks Test</h1>
+        <h1>Item List</h1>
         <div id='boomarks_items' data-update-url='bookmarks-ajax-processor.php'>
-            Auf dem Merkzettel: <span class='count'><?=$marks_count?></span>
+            Bookmarked items: <span class='count'><?=$marks_count?></span>
         </div>
-        <p><a href="bookmarks.php">Zum Merkzettel</a></p>
+        <p><a href="bookmarks.php">Show Bookmarks</a></p>
         <?php
         for($i=1;$i<=10;$i++){
             echo "<div class='item'>
@@ -32,7 +32,7 @@ $marks_count = $bookmarks->count();
                         <form action='bookmarks.php' method='post' data-ajax-processor='bookmarks-ajax-processor.php' class='bookmark-form-actions'>
                             <input type='hidden' name='action' value='add'>
                             <input type='hidden' name='id' value='{$i}'>
-                            <button type='submit'>Merken</button>
+                            <button type='submit'>Add</button>
                         </form>
                     </div>
                 </div>";

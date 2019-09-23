@@ -34,9 +34,9 @@ $marks_count = $bookmarks->count();
     <div class="container">
         <h1>Bookmarks</h1>
         <div id='boomarks_items' data-update-url='bookmarks-ajax-processor.php'>
-            Auf dem Merkzettel: <span class='count'><?=$marks_count?></span>
+            Bookmarked items: <span class='count'><?=$marks_count?></span>
         </div>
-        <p><a href="index.php">Zur Übersicht</a></p>
+        <p><a href="index.php">Item list</a></p>
         <?php
         foreach($marks as $mark){
             echo "<div class='item' id='item-{$mark}'>
@@ -47,7 +47,7 @@ $marks_count = $bookmarks->count();
                         <form action='bookmarks.php' data-ajax-processor='bookmarks-ajax-processor.php' method='post' class='bookmark-form-actions'>
                             <input type='hidden' name='action' value='remove'>
                             <input type='hidden' name='id' value='{$mark}'>
-                            <button type='submit'>Entfernen</button>
+                            <button type='submit'>Remove</button>
                         </form>
                     </div>
                 </div>";
