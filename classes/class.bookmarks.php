@@ -64,13 +64,17 @@ class Bookmarks{
         return false;
     }
 
+    public function count(){
+        return intval(count($this->get()));
+    }
+
     /**
      * Sets the cookie
      * @param array $data PHP of data to set
      * @return boolean 
      */
     private function set(array $data){
-        $newdata = json_encode($data);
+        $newdata = stripslashes(json_encode($data));
         if(setcookie($this->c_name,$newdata,time()+$this->c_lifetime,'/')){
             $this->json = $newdata; // update local data
             return true;

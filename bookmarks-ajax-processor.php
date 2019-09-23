@@ -18,7 +18,7 @@ if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){
         send_response("add",200,"item {$id} removed");
     }
 } else {
-    send_response("none",400,"bad request");
+    echo $bookmarks->count();
 }
 
 

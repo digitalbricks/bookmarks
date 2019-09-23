@@ -1,3 +1,8 @@
+$(document).ready(function(){
+    console.log("Cookies: "+$.cookie("bookmarks"));
+    update_bookmarks_count();
+});
+
 
 $('form.bookmark-form-actions').submit(function(event){
 
@@ -46,7 +51,8 @@ function item_added(){
     notie.alert({
         type: "success",
         text: "Erfolgreich hinzugefügt"
-    })
+    });
+    update_bookmarks_count();
 }
 
 function item_removed(id){
@@ -56,4 +62,12 @@ function item_removed(id){
     });
     var selector = "#item-"+id;
     $(selector).fadeOut();
+    update_bookmarks_count();
+}
+
+function update_bookmarks_count(){
+    var url = $('#boomarks_items').data('update-url');
+    $.get(url).then(function(data){
+        $('#boomarks_items .count').text(data);
+    });
 }

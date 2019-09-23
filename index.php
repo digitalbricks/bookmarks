@@ -1,3 +1,10 @@
+<?php
+require_once('classes/class.bookmarks.php');
+$bookmarks = new Bookmarks;
+
+$marks_count = $bookmarks->count();
+
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -11,6 +18,9 @@
 <body>
     <div class="container">
         <h1>Bookmarks Test</h1>
+        <div id='boomarks_items' data-update-url='bookmarks-ajax-processor.php'>
+            Auf dem Merkzettel: <span class='count'><?=$marks_count?></span>
+        </div>
         <p><a href="bookmarks.php">Zum Merkzettel</a></p>
         <?php
         for($i=1;$i<=10;$i++){

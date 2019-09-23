@@ -18,6 +18,7 @@ if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){
 }
 
 $marks = $bookmarks->get();
+$marks_count = $bookmarks->count();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +33,9 @@ $marks = $bookmarks->get();
 <body>
     <div class="container">
         <h1>Bookmarks</h1>
+        <div id='boomarks_items' data-update-url='bookmarks-ajax-processor.php'>
+            Auf dem Merkzettel: <span class='count'><?=$marks_count?></span>
+        </div>
         <p><a href="index.php">Zur Übersicht</a></p>
         <?php
         foreach($marks as $mark){
