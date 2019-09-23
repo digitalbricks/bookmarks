@@ -1,5 +1,5 @@
 <?php
-require_once('class.bookmarks.php');
+require_once('classes/class.bookmarks.php');
 $bookmarks = new Bookmarks;
 
 if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){

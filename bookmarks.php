@@ -1,5 +1,5 @@
 <?php
-require_once('class.bookmarks.php');
+require_once('classes/class.bookmarks.php');
 $bookmarks = new Bookmarks;
 
 if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){
@@ -35,7 +35,7 @@ $marks = $bookmarks->get();
         <p><a href="index.php">Zur Übersicht</a></p>
         <?php
         foreach($marks as $mark){
-            echo "<div class='item'>
+            echo "<div class='item' id='item-{$mark}'>
                     <div>
                         <h2>Item {$mark}</h2>
                     </div>
