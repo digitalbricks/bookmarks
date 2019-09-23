@@ -26,8 +26,8 @@ $marks = $bookmarks->get();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bookmarks</title>
-    <link rel="stylesheet" type="text/css" href="notie.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/notie.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 <body>
     <div class="container">
@@ -51,9 +51,9 @@ $marks = $bookmarks->get();
         ?>
     </div>
 
-<script src='jquery-3.4.1.min.js'></script>
-<script src='jquery.cookie.js'></script>
-<script src='notie.min.js'></script>
-<script src='bookmarks.js'></script>
+<script src='scripts/jquery-3.4.1.min.js'></script>
+<script src='scripts/jquery.cookie.js'></script>
+<script src='scripts/notie.min.js'></script>
+<script src='scripts/bookmarks.js'></script>
 </body>
 </html>
