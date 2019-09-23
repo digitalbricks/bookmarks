@@ -56,7 +56,6 @@ $marks_count = $bookmarks->count();
     </div>
 
 <script src='scripts/jquery-3.4.1.min.js'></script>
-<script src='scripts/jquery.cookie.js'></script>
 <script src='scripts/notie.min.js'></script>
 <script src='scripts/bookmarks.js'></script>
 </body>

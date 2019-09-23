@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log("Cookies: "+$.cookie("bookmarks"));
     update_bookmarks_count();
 });
 
@@ -27,7 +26,6 @@ $('form.bookmark-form-actions').submit(function(event){
         url: $(currentForm).data('ajax-processor'),
         data: formData
     }).done(function(response) {
-        console.log($.cookie("bookmarks"),response);
         response = jQuery.parseJSON(response);
 
         if(action=="add"){
