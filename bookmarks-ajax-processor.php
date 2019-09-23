@@ -7,9 +7,14 @@ if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){
     $id = intval($_POST['id']);
 
     if($_POST['action']=='add'){
-        // add to bookmarks
-        $bookmarks->add($id);
-        send_response("add",200,"item {$id} added");
+        if($bookmarks->is_allready_there($id)){
+            send_response("add",200,"item {$id} already present");
+        } else {
+            // add to bookmarks
+            $bookmarks->add($id);
+            send_response("add",200,"item {$id} added");
+        }
+        
     }
 
     if($_POST['action']=='remove'){

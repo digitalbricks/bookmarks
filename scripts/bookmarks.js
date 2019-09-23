@@ -28,11 +28,13 @@ $('form.bookmark-form-actions').submit(function(event){
         data: formData
     }).done(function(response) {
         console.log($.cookie("bookmarks"),response);
+        response = jQuery.parseJSON(response);
+
         if(action=="add"){
-            item_added();
+            item_added(id,response.message);
         }
         if(action=="remove"){
-            item_removed(id);
+            item_removed(id,response.message);
         }
         
 
@@ -47,18 +49,18 @@ $('form.bookmark-form-actions').submit(function(event){
 
 
 
-function item_added(){
+function item_added(id,message="Erfolgreich hinzugefügt"){
     notie.alert({
         type: "success",
-        text: "Erfolgreich hinzugefügt"
+        text: message
     });
     update_bookmarks_count();
 }
 
-function item_removed(id){
+function item_removed(id,message="Erfolgreich entfernt ("+id+")"){
     notie.alert({
         type: "success",
-        text: "Erfolgreich entfernt ("+id+")"
+        text: message
     });
     var selector = "#item-"+id;
     $(selector).fadeOut();

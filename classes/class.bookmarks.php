@@ -64,8 +64,19 @@ class Bookmarks{
         return false;
     }
 
+    /**
+     * Gets the number of items on bookmark list
+     * @return int 
+     */
     public function count(){
         return intval(count($this->get()));
+    }
+
+    public function is_allready_there(int $id){
+        if(in_array($id,$this->get())){
+            return true;
+        }
+        return false;
     }
 
     /**
