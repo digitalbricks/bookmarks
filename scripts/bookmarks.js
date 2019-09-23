@@ -48,7 +48,11 @@ $('form.bookmark-form-actions').submit(function(event){
 });
 
 
-
+/**
+ * Called when item is ADDED.
+ * @param {int} id - The id of the item.
+ * @param {string} message - The message to show.
+ */
 function item_added(id,message="Erfolgreich hinzugefügt"){
     notie.alert({
         type: "success",
@@ -57,6 +61,11 @@ function item_added(id,message="Erfolgreich hinzugefügt"){
     update_bookmarks_count();
 }
 
+/**
+ * Called when item is REMOVED.
+ * @param {int} id - The id of the item.
+ * @param {string} message - The message to show.
+ */
 function item_removed(id,message="Erfolgreich entfernt ("+id+")"){
     notie.alert({
         type: "success",
@@ -67,6 +76,9 @@ function item_removed(id,message="Erfolgreich entfernt ("+id+")"){
     update_bookmarks_count();
 }
 
+/**
+ * Updating bookmark counter.
+ */
 function update_bookmarks_count(){
     var url = $('#boomarks_items').data('update-url');
     $.get(url).then(function(data){

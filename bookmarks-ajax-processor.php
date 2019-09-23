@@ -23,6 +23,7 @@ if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){
         send_response("add",200,"item {$id} removed");
     }
 } else {
+    // if no POST, we just output the number of items
     echo $bookmarks->count();
 }
 
