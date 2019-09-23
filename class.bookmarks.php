@@ -1,8 +1,9 @@
 <?php
 class Bookmarks{
 
-    private $c_name = 'bookmarks';
+    private $c_name = "bookmarks";
     private $c_lifetime = 3600;
+    private $json = "";
 
     /**
      * Set the bookmark cookie with an empty array if not exists
@@ -13,6 +14,7 @@ class Bookmarks{
             $inital = json_encode(array());
             setcookie($this->c_name,$inital,time()+$this->c_lifetime,'/');       
         }
+        $this->json = $_COOKIE[$this->c_name];
     }
 
     /**
@@ -20,8 +22,8 @@ class Bookmarks{
      * @return array 
      */
     public function get(){
-        if(isset($_COOKIE[$this->c_name])){
-            $content =  json_decode($_COOKIE[$this->c_name],true); // the 'true' argument is important for getting an array!
+        if($this->json!=""){
+            $content =  json_decode($this->json,true); // the 'true' argument is important for getting an array!
             if(is_array($content) AND !is_object($content)){
                 return $content;
             } 
@@ -40,9 +42,6 @@ class Bookmarks{
             if(!in_array($data,$cdata)){
                 $cdata[] = $data;
                 if($this->set($cdata)){
-                    // update $_COOKIE (for usage until new request)
-                    // making sure the get() method will return the up-to-date values
-                    $_COOKIE[$this->c_name] = json_encode($cdata);
                     return true;
                 }
             }
@@ -60,9 +59,6 @@ class Bookmarks{
         $key = array_search($value,$cdata);
         unset($cdata[$key]);
         if($this->set($cdata)){
-            // update $_COOKIE (for usage until new request)
-            // making sure the get() method will return the up-to-date values
-            $_COOKIE[$this->c_name] = json_encode($cdata);
             return true;
         }
         return false;
@@ -76,6 +72,7 @@ class Bookmarks{
     private function set(array $data){
         $newdata = json_encode($data);
         if(setcookie($this->c_name,$newdata,time()+$this->c_lifetime,'/')){
+            $this->json = $newdata; // update local data
             return true;
         }
         return false;
