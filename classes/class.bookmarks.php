@@ -12,9 +12,11 @@ class Bookmarks{
     function __construct() {
         if(!isset($_COOKIE[$this->c_name])){
             $inital = json_encode(array());
-            setcookie($this->c_name,$inital,time()+$this->c_lifetime,'/');       
+            setcookie($this->c_name,$inital,time()+$this->c_lifetime,'/');
+            $this->json = $inital;    
+        } else {
+            $this->json = $_COOKIE[$this->c_name];
         }
-        $this->json = $_COOKIE[$this->c_name];
     }
 
     /**
