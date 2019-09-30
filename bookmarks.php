@@ -2,18 +2,32 @@
 require_once('classes/class.bookmarks.php');
 $bookmarks = new Bookmarks;
 
+// get bookmarks limit
+$bookmarks_limit = $bookmarks->getLimit();
+
 if(isset($_POST) AND isset($_POST['id']) AND isset($_POST['action'])){
     // get id from post
     $id = intval($_POST['id']);
 
     if($_POST['action']=='add'){
-        // add to bookmarks
-        $bookmarks->add($id);
+        if($bookmarks->is_allready_there($id)){
+            $notice = 'Item allready bookmarked!';
+        } else {
+            // add only if limit is not reached yet
+            if($bookmarks->count()<$bookmarks_limit){
+                // add to bookmarks
+                $bookmarks->add($id);
+                $notice = 'Item added';
+            } else {
+                $notice = "Limit of {$bookmarks_limit} reached.";
+            }
+        }
     }
 
     if($_POST['action']=='remove'){
         // remove from bookmarks
         $bookmarks->remove($id);
+        $notice = 'Item removed';
     }
 }
 
@@ -34,10 +48,14 @@ $marks_count = $bookmarks->count();
     <div class="container">
         <h1>Bookmarks</h1>
         <div id='boomarks_items' data-update-url='bookmarks-ajax-processor.php'>
-            Bookmarked items: <span class='count'><?=$marks_count?></span>
+            Bookmarked items: <span class='count'><?=$marks_count?></span> of <?=$bookmarks_limit?>
         </div>
         <p><a href="index.php">Item list</a></p>
         <?php
+        if(isset($notice)){
+            echo "<div class='notice'>{$notice}</div>";
+        }
+
         foreach($marks as $mark){
             echo "<div class='item' id='item-{$mark}'>
                     <div>

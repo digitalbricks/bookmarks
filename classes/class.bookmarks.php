@@ -2,8 +2,10 @@
 class Bookmarks{
 
     private $c_name = "bookmarks";
-    private $c_lifetime = 3600;
+    private $c_lifetime = 604800; // 604800 = 7 days
+    private $limit = 10;
     private $json = "";
+    private $count = 0;
 
     /**
      * Set the bookmark cookie with an empty array if not exists
@@ -16,6 +18,8 @@ class Bookmarks{
         } else {
             $this->json = $_COOKIE[$this->c_name];
         }
+        $this->count = intval(count($this->get()));
+        
     }
 
     /**
@@ -32,6 +36,15 @@ class Bookmarks{
         return array();
     }
 
+
+    /**
+     * Get the limit of bookmarks
+     * @return array 
+     */
+    public function getLimit(){
+        return intval($this->limit);
+    }
+
     /**
      * Adds an entry to the bookmarks (and the cookie)
      * @param mixed $data item to add
@@ -40,9 +53,12 @@ class Bookmarks{
     public function add($data){
         $cdata = $this->get();
         if(is_array($cdata)){
-            if(!in_array($data,$cdata)){
+            // only add if not already in array
+            // and limit not exeeded
+            if(!in_array($data,$cdata) AND $this->count()<$this->getLimit()){
                 $cdata[] = $data;
                 if($this->set($cdata)){
+                    $this->count = count($cdata);
                     return true;
                 }
             }
@@ -60,6 +76,7 @@ class Bookmarks{
         $key = array_search($value,$cdata);
         unset($cdata[$key]);
         if($this->set($cdata)){
+            $this->count = count($cdata);
             return true;
         }
         return false;
@@ -70,7 +87,7 @@ class Bookmarks{
      * @return int 
      */
     public function count(){
-        return intval(count($this->get()));
+        return $this->count;
     }
 
     public function is_allready_there(int $id){

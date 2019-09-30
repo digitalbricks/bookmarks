@@ -18,3 +18,11 @@ h2{
     padding: 2em;
     box-sizing: border-box;
 }
+.notice{
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    margin: 1em 0;
+    padding: 1em;
+}

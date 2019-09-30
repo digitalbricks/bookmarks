@@ -19,11 +19,11 @@ $marks_count = $bookmarks->count();
     <div class="container">
         <h1>Item List</h1>
         <div id='boomarks_items' data-update-url='bookmarks-ajax-processor.php'>
-            Bookmarked items: <span class='count'><?=$marks_count?></span>
+            Bookmarked items: <span class='count'><?=$marks_count?></span> of <?=$bookmarks->getLimit()?>
         </div>
         <p><a href="bookmarks.php">Show Bookmarks</a></p>
         <?php
-        for($i=1;$i<=10;$i++){
+        for($i=1;$i<=15;$i++){
             echo "<div class='item'>
                     <div>
                         <h2>Item {$i}</h2>
