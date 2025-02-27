@@ -39,7 +39,7 @@ class Bookmarks{
 
     /**
      * Get the limit of bookmarks
-     * @return array 
+     * @return int 
      */
     public function getLimit(){
         return intval($this->limit);
